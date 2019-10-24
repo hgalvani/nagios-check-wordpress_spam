@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Problem
+# Afin de réagir en cas de campagne de SPAM sur les commentaires de votre site, mettez en place une sonde permettant de remonter 
+# une alerte “warning” dès que 4 commentaires ou plus ont été postés dans les 4 dernières heures, 
+# une alerte “critical” dès que 10 commentaires ou plus ont été postés dans les 4 dernières heures.
+
+## Variables
+wordpress_database="anteverse"
+timediff_limit=4
+
+## Get comments number in timediff_limit hours past
+comments_number=$(mysql -sNe "SELECT COUNT(c.comment_date) FROM $wordpress_database.wp_comments as c where hour(timediff( localtime(), c.comment_date ) ) < $timediff_limit;")
+
+## Output format
+output_prefix="WORDPRESS SPAM"
+output="Comments Number: $comments_number" 
+
+
+if [ $comments_number -lt 4 ]
+  then
+    echo "$output_prefix OK - $output"
+    exit 0
+elif [ $comments_number -eq 4 -a $comments_number -lt 10 ]
+  then
+    echo "$output_prefix WARNING - $output"
+    exit 1
+elif [ $comments_number -ge 10 ]
+  then
+    echo "$output_prefix CRITICAL - $output"
+    exit 2
+else
+  echo "$output_prefix UNKNOWN - $output"
+  exit 3
+fi
+
