@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# Problem
-# Afin de réagir en cas de campagne de SPAM sur les commentaires de votre site, mettez en place une sonde permettant de remonter 
-# une alerte “warning” dès que 4 commentaires ou plus ont été postés dans les 4 dernières heures, 
-# une alerte “critical” dès que 10 commentaires ou plus ont été postés dans les 4 dernières heures.
+# Aim
+# Check all comments posted in the last 4 hours to avoid a Spam campaign. I need a warning threshold 
+#set on 4 comments in last 4 hours, and a critical threshold set on 10 comments in last 4 hours.
 
 ## Variables
 wordpress_database="anteverse"
