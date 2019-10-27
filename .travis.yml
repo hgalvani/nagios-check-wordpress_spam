@@ -5,7 +5,7 @@ services:
 
 before_install:
   - docker run -it --rm \
-    -e WORDPRESS_DB_NAME=anteverse
+    -e WORDPRESS_DB_NAME=anteverse \
     --volumes-from some-wordpress \
     --network container:some-wordpress \
     wordpress:cli user list
