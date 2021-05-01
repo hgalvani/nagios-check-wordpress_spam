@@ -20,7 +20,7 @@ if [ $comments_number -lt 4 ]
   then
     echo "$output_prefix OK - $output"
     exit 0
-elif [ $comments_number -eq 4 -a $comments_number -lt 10 ]
+elif [ $comments_number -ge 4 -a $comments_number -lt 10 ]
   then
     echo "$output_prefix WARNING - $output"
     exit 1
